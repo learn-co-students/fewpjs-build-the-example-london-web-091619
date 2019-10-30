@@ -4,6 +4,34 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let glyphStates = {
+  '♡':'♥',
+  '♥':'♡'
+};
+
+let colorStates = {
+  "red": "",
+   "" : "red"
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const heart = document.querySelector(".like-glyph")
+  const like = document.querySelector(".like")
+
+
+  heart.addEventListener("click", function(){
+    mimicServerCall()
+    .then(function(serverMessage){
+      heart.innerText = glyphStates[heart.innerText];
+      heart.style.color = colorStates[heart.style.color];
+    })
+    .catch(function(error){
+      setTimeout(() => document.querySelector("#modal").className = "hidden", 5000)
+      document.querySelector("#modal").className = ""
+  })
+  })
+})
 
 
 
