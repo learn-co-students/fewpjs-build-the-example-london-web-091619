@@ -4,12 +4,55 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
+const modal = document.querySelector('#modal')
 
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
 //------------------------------------------------------------------------------
+ 
+
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+//grab the element
+//change it 
+// append the changes
+
+
+let likes = document.querySelectorAll(".like")
+ document.addEventListener('click', function(e){
+ errorMessage()
+  
+   if (e.target.innerText === "Like! ♡"){
+  e.target.firstElementChild.innerText = FULL_HEART
+  e.target.firstElementChild.className = "activated-heart"
+   }
+
+   else if (e.target.innerText === "Like! ♥"){
+     e.target.firstElementChild.innerText = EMPTY_HEART
+     e.target.firstElementChild.className = "like-glyph"
+
+   }
+})
+
+
+function errorMessage(){
+  mimicServerCall().catch(function(error){
+    modal.className = ""
+    modal.innerHTML = error
+    setTimeout(function(){
+      modal.className = "hidden"
+    }, 5000)
+
+  })
+
+}
+
+
+})
+
 
 function mimicServerCall(url="http://mimicServer.example.com", config={}) {
   return new Promise(function(resolve, reject) {
@@ -22,4 +65,5 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
       }
     }, 300);
   });
+ 
 }
